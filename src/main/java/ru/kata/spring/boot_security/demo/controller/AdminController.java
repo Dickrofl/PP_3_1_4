@@ -35,7 +35,7 @@ public class AdminController {
         return "redirect:/admin";
     }
     @PatchMapping("/admin/{id}")
-    public String update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
+    public String update(@ModelAttribute("user") User user) {
         daoUserService.updateUser(user);
         return "redirect:/admin";
     }
