@@ -9,9 +9,6 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repository.CustomUserDetailsService;
 import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 import java.security.Principal;
-
-
-
 @Controller
 public class AdminController {
     @Autowired

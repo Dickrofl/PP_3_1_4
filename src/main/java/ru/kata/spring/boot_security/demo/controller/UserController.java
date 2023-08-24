@@ -15,7 +15,6 @@ import java.security.Principal;
 @Controller
 @RequestMapping("/")
 public class UserController {
-
     @Autowired
     CustomUserDetailsService customUserDetailsService;
     @Autowired
@@ -33,9 +32,4 @@ public class UserController {
         model.addAttribute("user", daoUserService.getUserById(user.getId()));
         return "user";
     }
-//    @GetMapping("/user")
-//    public String show(Principal principal, Model model) {
-//        model.addAttribute("user", userService.getUserByLogin(principal.getName()));
-//        return "user";
-//    }
 }
