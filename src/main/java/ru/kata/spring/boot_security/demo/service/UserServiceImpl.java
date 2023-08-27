@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     UserDao userDao;
     @Autowired
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
     @Override
     @Transactional

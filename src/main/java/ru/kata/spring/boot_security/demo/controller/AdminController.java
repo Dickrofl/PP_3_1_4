@@ -5,14 +5,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.repository.RoleRepository;
+
+import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import java.security.Principal;
 @Controller
 public class AdminController {
     @Autowired
-    private RoleRepository roleRepository;
+    RoleService roleService;
     @Autowired
     UserService userService;
 
@@ -22,13 +23,13 @@ public class AdminController {
         User userPrincipal = userService.findByUsername(username);
         model.addAttribute("principal", userService.getUserById(userPrincipal.getId()));
         model.addAttribute("user", userService.getAllUsers());
-        model.addAttribute("roles", roleRepository.findAll());
+        model.addAttribute("roles", roleService.findAll());
         return "admin";
     }
     @GetMapping("/newUser")
     public String getInfoForCreateUser(Model model){
         model.addAttribute("newUser", new User());
-        model.addAttribute("roles", roleRepository.findAll());
+        model.addAttribute("roles", roleService.findAll());
         return "newUser";
     }
 
