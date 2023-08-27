@@ -23,13 +23,13 @@ public class AdminController {
         User userPrincipal = userService.findByUsername(username);
         model.addAttribute("principal", userService.getUserById(userPrincipal.getId()));
         model.addAttribute("user", userService.getAllUsers());
-        model.addAttribute("roles", roleService.findAll());
+        model.addAttribute("roles", roleService.getListRoles());
         return "admin";
     }
     @GetMapping("/newUser")
     public String getInfoForCreateUser(Model model){
         model.addAttribute("newUser", new User());
-        model.addAttribute("roles", roleService.findAll());
+        model.addAttribute("roles", roleService.getListRoles());
         return "newUser";
     }
 
