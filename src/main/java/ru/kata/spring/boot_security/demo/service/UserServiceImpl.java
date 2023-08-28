@@ -1,13 +1,13 @@
 package ru.kata.spring.boot_security.demo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.kata.spring.boot_security.demo.dao.UserDao;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
@@ -17,44 +17,46 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
-    @Autowired
-    UserDao userDao;
-    @Autowired
-    UserRepository userRepository;
+
+
+    private final UserRepository userRepository;
+
+
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     @Transactional
     public void saveUser(User user) {
-        userDao.saveUser(user);
+        userRepository.save(user);
     }
 
     @Override
     @Transactional
     public void updateUser(User user) {
-        userDao.updateUser(user);
-
+        userRepository.save(user);
     }
 
     @Override
     @Transactional
     public void removeUserById(long id) {
-        userDao.removeUserById(id);
+        userRepository.deleteById(id);
 
     }
 
     @Override
     public List<User> getAllUsers() {
-        return userDao.getAllUsers();
+        return userRepository.findAll();
     }
 
     @Override
     public User getUserById(long id) {
-        return userDao.getUserById(id);
-    }
-
-    @Override
-    public User getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
+        User user = userRepository.findById(id).orElse(null);
+        if (user != null) {
+            Hibernate.initialize(user); // Принудительная инициализация объекта
+        }
+        return user;
     }
 
     public User findByUsername(String username) {
