@@ -20,7 +20,7 @@ public class AdminController {
     @GetMapping("/admin")
     public String getUsersPage(Principal principal, @ModelAttribute("user") User user,Model model) {
         String username = principal.getName();
-        User userPrincipal = userService.findByUsername(username);
+        User userPrincipal = userService.getUserByUsername(username);
         model.addAttribute("principal", userService.getUserById(userPrincipal.getId()));
         model.addAttribute("user", userService.getAllUsers());
         model.addAttribute("roles", roleService.getListRoles());

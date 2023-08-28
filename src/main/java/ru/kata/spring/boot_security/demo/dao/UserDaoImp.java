@@ -37,5 +37,7 @@ public class UserDaoImp implements UserDao {
     public User getUserById(long id) {
         return entityManager.find(User.class, id);
     }
+
+
 }
 

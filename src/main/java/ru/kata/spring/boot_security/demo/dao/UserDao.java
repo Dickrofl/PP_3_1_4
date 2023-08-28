@@ -13,4 +13,7 @@ public interface UserDao {
     List<User> getAllUsers();
 
     User getUserById(long id);
+
+    public User getUserByUsername(String username);
+
 }
