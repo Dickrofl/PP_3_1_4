@@ -2,7 +2,6 @@ package ru.kata.spring.boot_security.demo.model;
 
 import com.sun.istack.NotNull;
 import lombok.Data;
-import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
